@@ -16,8 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponse
+
+def home_view(request):
+    return HttpResponse("Welcome to the Interactive Quiz Application!")
+
+#def redirect_to_quizz(request):
+    #return redirect('/quizz/')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('quizz/', include('quizz.urls')),
+    #path('', redirect_to_quizz),
+    path('', home_view, name='home'),
+    path('quizz/', include('quizz.urls')),
 ]
