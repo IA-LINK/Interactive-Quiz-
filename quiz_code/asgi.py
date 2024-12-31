@@ -1,5 +1,5 @@
 """
-ASGI config for quiz_base project.
+ASGI config for quiz_code project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'quiz_base.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'quiz_code.settings')
 
 application = get_asgi_application()
