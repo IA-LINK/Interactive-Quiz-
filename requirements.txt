@@ -1,0 +1,9 @@
+django>=4.12.2
+aniso8601>=9.0.1 
+click>=8.1.8 
+flask-login>=0.6.3 
+flask-restful>=0.3.10 
+flask-sqlalchemy>=3.1.1 
+flask-wtf>=1.2.1 
+wtforms>=3.1.2
+python>=3.12.8
