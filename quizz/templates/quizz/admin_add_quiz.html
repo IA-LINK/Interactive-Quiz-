@@ -1,21 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add Quiz</title>
-</head>
-<body>
-    <h1>Add New Quiz</h1>
+<!-- admin_add_quiz.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Add New Quiz</h2>
     <form method="POST">
         {% csrf_token %}
-        <label for="title">Title:</label><br>
-        <input type="text" id="title" name="title" required><br><br>
-        
-        <label for="description">Description:</label><br>
-        <textarea id="description" name="description" rows="4" required></textarea><br><br>
-        
-        <button type="submit">Add Quiz</button>
+        {{ quiz_form.as_p }}
+        <button type="submit" class="btn btn-primary">Add Quiz</button>
     </form>
-    <br>
-    <a href="{% url 'admin_quiz_list' %}">Back to Quiz List</a>
-</body>
-</html>
+</div>
+{% endblock %}
