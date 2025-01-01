@@ -1,47 +1,143 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Quiz, Question, Option, Result
-from .forms import QuizForm, QuestionForm, OptionForm
+from django.contrib.auth.decorators import login_required, user_passes_test
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializers import QuizSerializer
+from django.contrib import messages
 
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'quizz/home.html')
 
-
-# List all quizz
-@login_required
-def admin_quiz_list(request):
+def quiz_list(request):
     quizz = Quiz.objects.all()
-    return render(request, 'admin/quiz_list.html', {'quizz': quizz})
+    return render(request, 'quizz/quiz_list.html', {'quizz': quizz})
 
-# Add a new quiz
 @login_required
-def admin_add_quiz(request):
-    if request.method == 'POST':
-        form = QuizForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('admin_quiz_list')
-    else:
-        form = QuizForm()
-    return render(request, 'admin/add_quiz.html', {'form': form})
-
-# Edit a quiz
-@login_required
-def admin_edit_quiz(request, quiz_id):
-    quiz = get_object_or_404(Quiz, id=quiz_id)
-    if request.method == 'POST':
-        form = QuizForm(request.POST, instance=quiz)
-        if form.is_valid():
-            form.save()
-            return redirect('admin_quiz_list')
-    else:
-        form = QuizForm(instance=quiz)
-    return render(request, 'admin/edit_quiz.html', {'form': form, 'quiz': quiz})
-
-# Delete a quiz
-@login_required
+@user_passes_test(lambda u: u.is_staff)  # Restrict to staff users
 def admin_delete_quiz(request, quiz_id):
     quiz = get_object_or_404(Quiz, id=quiz_id)
-    quiz.delete()
-    return redirect('admin_quiz_list')
+
+    if request.method == 'POST':
+        quiz.delete()
+        messages.success(request, "Quiz deleted successfully!")
+        return redirect('admin_quiz_list')
+
+    return render(request, 'quizz/admin_confirm_delete.html', {'quiz': quiz})
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)  # Restrict to staff users
+def admin_edit_quiz(request, quiz_id):
+    quiz = get_object_or_404(Quiz, id=quiz_id)
+
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+
+        if title and description:
+            quiz.title = title
+            quiz.description = description
+            quiz.save()
+            messages.success(request, "Quiz updated successfully!")
+            return redirect('admin_quiz_list')
+        else:
+            messages.error(request, "Both title and description are required.")
+
+    return render(request, 'quizz/admin_edit_quiz.html', {'quiz': quiz})
+
+def admin_edit_quiz(request, quiz_id):
+    quiz = get_object_or_404(Quiz, id=quiz_id)
+
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+
+        if title and description:
+            quiz.title = title
+            quiz.description = description
+            quiz.save()
+            messages.success(request, "Quiz updated successfully!")
+            return redirect('admin_quiz_list')
+        else:
+            messages.error(request, "Both title and description are required.")
+
+    return render(request, 'quizz/admin_edit_quiz.html', {'quiz': quiz})
+
+def admin_add_quiz(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+
+        if title and description:
+            Quiz.objects.create(title=title, description=description)
+            messages.success(request, "Quiz added successfully!")
+            return redirect('admin_quiz_list')
+        else:
+            messages.error(request, "Both title and description are required.")
+
+    return render(request, 'quizz/admin_add_quiz.html')
+
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)  # Restrict to staff users
+def admin_add_quiz(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+
+        if title and description:
+            Quiz.objects.create(title=title, description=description)
+            messages.success(request, "Quiz added successfully!")
+            return redirect('admin_quiz_list')
+        else:
+            messages.error(request, "Both title and description are required.")
+
+    return render(request, 'quizz/admin_add_quiz.html')
+
+def admin_quiz_list(request):
+    # Retrieve all quizz to display in the admin panel
+    quizz = Quiz.objects.all()
+    return render(request, 'quizz/admin_quiz_list.html', {'quizz': quizz})
+
+from django.contrib.auth.decorators import login_required, user_passes_test
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)  # Restrict to staff users
+def admin_quiz_list(request):
+    quizz = Quiz.objects.all()
+    return render(request, 'quizz/admin_quiz_list.html', {'quizz': quizz})
+
+
+class QuizListAPI(APIView):
+    def get(self, request):
+        quizzes = Quiz.objects.all()
+        serializer = QuizSerializer(quizzes, many=True)
+        return Response(serializer.data)
+
+@login_required
+def take_quiz(request, quiz_id):
+    quiz = get_object_or_404(Quiz, id=quiz_id)
+    questions = quiz.questions.all()
+    current_question_index = request.session.get('current_question_index', 0)
+
+    if current_question_index >= len(questions):
+        # Calculate score and save result
+        score = request.session.get('score', 0)
+        Result.objects.create(user=request.user, quiz=quiz, score=score)
+        del request.session['current_question_index']
+        del request.session['score']
+        return render(request, 'quizz/quiz_complete.html', {'quiz': quiz, 'score': score})
+
+    question = questions[current_question_index]
+
+    if request.method == 'POST':
+        selected_option_id = request.POST.get('option')
+        if selected_option_id:
+            selected_option = Option.objects.get(id=selected_option_id)
+            if selected_option.is_correct:
+                request.session['score'] = request.session.get('score', 0) + 1
+        request.session['current_question_index'] += 1
+        return redirect('take_quiz', quiz_id=quiz.id)
+
+    return render(request, 'quizz/take_quiz.html', {'quiz': quiz, 'question': question})

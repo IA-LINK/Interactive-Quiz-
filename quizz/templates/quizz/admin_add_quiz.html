@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Quiz</title>
+</head>
+<body>
+    <h1>Add New Quiz</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title" required><br><br>
+        
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description" rows="4" required></textarea><br><br>
+        
+        <button type="submit">Add Quiz</button>
+    </form>
+    <br>
+    <a href="{% url 'admin_quiz_list' %}">Back to Quiz List</a>
+</body>
+</html>

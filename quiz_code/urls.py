@@ -29,4 +29,5 @@ urlpatterns = [
     #path('', redirect_to_quizz),
     path('', home_view, name='home'),
     path('quizz/', include('quizz.urls')),
+    #path('quizz/', views.quiz_list, name='quiz_list'), 
 ]

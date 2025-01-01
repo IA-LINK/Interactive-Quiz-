@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Quiz</title>
+</head>
+<body>
+    <h1>Delete Quiz</h1>
+    <p>Are you sure you want to delete the quiz "{{ quiz.title }}"?</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Yes, delete</button>
+    </form>
+    <br>
+    <a href="{% url 'admin_quiz_list' %}">Cancel</a>
+</body>
+</html>

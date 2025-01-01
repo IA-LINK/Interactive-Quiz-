@@ -7,14 +7,14 @@ class OptionSerializer(serializers.ModelSerializer):
         fields = ['id', 'text', 'is_correct']
 
 class QuestionSerializer(serializers.ModelSerializer):
-    options = OptionSerializer(many=True)
+    options = OptionSerializer(many=True, read_only=True)
 
     class Meta:
         model = Question
         fields = ['id', 'text', 'options']
 
 class QuizSerializer(serializers.ModelSerializer):
-    questions = QuestionSerializer(many=True)
+    questions = QuestionSerializer(many=True, read_only=True)
 
     class Meta:
         model = Quiz

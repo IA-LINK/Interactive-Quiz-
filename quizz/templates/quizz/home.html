@@ -8,7 +8,8 @@ Home - Interactive Quiz
 
 <h2>Welcome to the Interactive Quiz Cipher Application</h2>
 <p>Start a quiz and test your knowledge.</p>
-<button><a href="{% url 'home' %}">Take a Quiz</a></button>
+<button><a href="{% url 'quiz_list' %}">Take a Quiz</a></button>
+
 <h3>Quizz</h3>
 <ul>
     {% for quiz in quizz %}
