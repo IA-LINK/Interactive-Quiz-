@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <title>Quiz App</title>
+    <style>
+        .width {
+            padding-left: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-radius: 40px;
+            width: 180px;
+            font-size: 15px;
+        }
+
+        .container {
+            width: 42%;
+            height: 20%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            margin-top: 150px;
+            color: white;
+            background-color: darkcyan;
+        }
+
+        
+        .btn {
+            padding: 10px 10px 10px 10px;
+            width: 80px;
+            border-radius: 40px;
+            background-color: green;
+            color: white;
+        }
+
+        .background {
+            background-color: rgb(71, 165, 165);
+        }
+
+       
+    </style>
+</head>
+
+<body class="background">
+
+    <center>
+        <div class="container">
+            <form method='POST'>
+                {% csrf_token %}
+
+                <h2>Login</h2>
+
+                <label for="username">Username &nbsp; &nbsp; &nbsp; &nbsp;</label>
+                <input class="width" type="text" id="username" name="username" required="required"><br><br>
+
+                <label for="password">Password &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </label>
+                <input class="width" type="password" id="password" name="password" required="required"><br><br>
+
+                
+
+                <button class="btn">Login</button>
+
+            </form>
+        </div>
+    </center>
+</body>
+
+</html>
