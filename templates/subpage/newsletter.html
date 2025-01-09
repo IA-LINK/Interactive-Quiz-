@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter - Quiz App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+        .newsletter-section {
+            padding: 50px 0;
+            background-color: #333;
+            color: white;
+            text-align: center;
+        }
+        .newsletter-section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .newsletter-section p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        .newsletter-form input[type="email"] {
+            width: 300px;
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .newsletter-form button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .newsletter-form button:hover {
+            background-color: #45a049;
+        }
+        .success-message {
+            color: #4CAF50;
+            font-size: 18px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Newsletter Section -->
+    <div class="newsletter-section">
+        <h2>Stay Updated!</h2>
+        <p>Subscribe to our newsletter and be the first to know about new features and quizzes!</p>
+
+        <div class="newsletter-form">
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <button onclick="subscribe()">Subscribe</button>
+        </div>
+
+        <div class="success-message" id="successMessage">
+            <p>Thank you for subscribing!</p>
+        </div>
+    </div>
+
+    <script>
+        function subscribe() {
+            const email = document.getElementById('email').value;
+            if (email) {
+                document.getElementById('successMessage').style.display = 'block';
+                document.getElementById('email').value = ''; // Clear the input field
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        }
+    </script>
+
+</body>
+</html>

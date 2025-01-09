@@ -2,96 +2,78 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <title>Quiz App</title>
+    <title>Signup - Quiz App</title>
     <style>
-        .width {
-            padding-left: 8px;
-            padding-top: 8px;
-            padding-bottom: 8px;
-            border-radius: 40px;
-            width: 180px;
-            font-size: 15px;
-        }
-
-        .container {
-            width: 40%;
-            height: 10%;
-            margin: 0 auto;
+        .form-container {
+            max-width: 500px;
+            margin: 50px auto;
             padding: 20px;
-            border: 1px solid #ccc;
-            margin-top: 50px;
+            border-radius: 10px;
+            background-color: #008b8b;
             color: white;
-            background-color: darkcyan;
         }
 
-        .login_space {
-            margin-left: 80px;
-
+        .form-control {
+            border-radius: 20px;
         }
 
-        .btn {
-            padding: 10px 10px 10px 10px;
-            width: 80px;
-            border-radius: 40px;
+        .btn-custom {
+            border-radius: 20px;
             background-color: green;
             color: white;
         }
 
-        .background {
-            background-color: rgb(71, 165, 165);
+        .login-link {
+            font-size: 14px;
+            color: #f8f9fa;
+            text-decoration: none;
         }
 
-    
-
-        .text{
-             font-size: 20px;
-             background-color: rgb(150, 147, 147);
-             border-radius: 40%;
-             padding-left: 5px;
-             padding-right: 5px;
-             padding-bottom: 5px;
-             color: rgba(0, 0, 0, 0.616);
+        .login-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 
-<body class="background">
+<body class="bg-light">
 
-     <center>
     <div class="container">
-        <form method='POST'>
-            {% csrf_token %}
-           
-            <h6>Alrady Account Please  <a class="text" href="login">Login</a></h6><br>
-        
-        
-           <h1>Signup </h1><br>
-            
-           <label for="firstName">First Name &nbsp; &nbsp; &nbsp; &nbsp;</label>
-           <input class="width" type="text" id="firstName" name="firstName" required="required"><br><br>
-
-           <label for="lastName">Last Name &nbsp; &nbsp; &nbsp; &nbsp;</label>
-           <input class="width" type="text"  id="lastName" name="lastName" required="required"><br><br>
-
-           <label for="email">Email &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</label>
-           <input class="width" type="text" id="email" name="email" required="required"><br><br>
-
-           <label for="username">Username &nbsp; &nbsp; &nbsp; &nbsp;</label>
-           <input class="width" type="text" id="username" name="username" required="required"><br><br>
-
-           <label for="password">Password &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</label>
-           <input class="width" type="password" id="password" name="password" required="required"><br><br>
-
-           <input class="btn" type="submit" value="Submit">
+        <div class="form-container">
+            <form method="POST">
+                {% csrf_token %}
+                <h1 class="text-center">Signup</h1>
+                <p class="text-center">
+                    Already have an account? 
+                    <a class="login-link" href="login">Login</a>
+                </p>
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Enter your first name" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Enter your last name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="Choose a username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Enter a password" required>
+                </div>
+                <button type="submit" class="btn btn-custom btn-block">Submit</button>
             </form>
-
+        </div>
     </div>
 
-</center>
 </body>
 
 </html>
