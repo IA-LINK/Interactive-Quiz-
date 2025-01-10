@@ -9,3 +9,6 @@ class Question(models.Model):
     option3 = models.CharField(max_length=100)
     option4 = models.CharField(max_length=100)
     answer  = models.CharField(max_length=100)
+
+    def get_question_total():
+        return Question.objects.all().count()

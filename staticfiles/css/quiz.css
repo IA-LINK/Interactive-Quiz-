@@ -1,0 +1,117 @@
+.main_div{
+    border-radius: 30px;
+    background-color: rgb(48, 7, 7);
+    color: white;
+}
+
+.next_btn{
+    border-radius: 50px;
+}
+
+.text{
+
+    background-color: cyan;
+}
+
+.sub_btn{
+    border-radius: 40px;
+}
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+}
+
+.main_div {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-top: 50px;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Radio Buttons */
+.radio {
+    margin-bottom: 15px;
+}
+
+.radio input[type="radio"] {
+    margin-right: 10px;
+}
+
+.radio label {
+    font-size: 18px;
+    color: #555;
+}
+
+/* Buttons */
+#save_ans {
+    background-color: #28a745;
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+}
+
+#save_ans:hover {
+    background-color: #218838;
+}
+
+.next_btn, .sub_btn {
+    background-color: #343a40;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.next_btn:hover, .sub_btn:hover {
+    background-color: #23272b;
+}
+
+/* Pagination */
+.paginator {
+    margin-top: 20px;
+}
+
+/* Background */
+.bg {
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9UsfGYhakgik_Ha5BUXH-NlYtSKw_a_G3WQ&usqp=CAU);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .main_div {
+        width: 90%;
+        margin: 20px auto;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .radio label {
+        font-size: 16px;
+    }
+
+    #save_ans {
+        width: 100%;
+    }
+
+    .next_btn, .sub_btn {
+        width: 100%;
+    }
+}
+

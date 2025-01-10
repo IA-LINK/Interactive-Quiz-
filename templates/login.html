@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Quiz App{% endblock %}
+
+{% block content %}
+    <center>
+        <div class="container">
+            <form method="POST">
+                {% csrf_token %}
+
+                <h2>Login</h2>
+
+                <label for="username">Username &nbsp; &nbsp; &nbsp; &nbsp;</label>
+                <input class="width" type="text" id="username" name="username" required="required"><br><br>
+
+                <label for="password">Password &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </label>
+                <input class="width" type="password" id="password" name="password" required="required"><br><br>
+
+                <button class="btn">Login</button>
+            </form>
+        </div>
+    </center>
+{% endblock %}
