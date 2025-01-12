@@ -1,6 +1,65 @@
 {% extends 'base.html' %}
 
+{% block title %}Signup - Quiz App{% endblock %}
+
 {% block content %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color:rgb(130, 130, 170);
+        }
+        .container {
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0px 4px 6px rgba(24, 23, 23, 0.1);
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        h6 {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        h6 a.text {
+            color: #007bff;
+            text-decoration: none;
+        }
+        h6 a.text:hover {
+            text-decoration: underline;
+        }
+        label {
+            font-size: 14px;
+            color: #555;
+        }
+        .width {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+
     <div class="container">
         <form method="POST">
             {% csrf_token %}
@@ -9,20 +68,20 @@
 
             <h1>Signup</h1><br>
             
-            <label for="firstName">First Name &nbsp; &nbsp; &nbsp; &nbsp;</label>
-            <input class="width" type="text" id="firstName" name="firstName" required="required"><br><br>
+            <label for="firstName">First Name</label>
+            <input class="width" type="text" id="firstName" name="firstName" required="required"><br>
 
-            <label for="lastName">Last Name &nbsp; &nbsp; &nbsp; &nbsp;</label>
-            <input class="width" type="text" id="lastName" name="lastName" required="required"><br><br>
+            <label for="lastName">Last Name</label>
+            <input class="width" type="text" id="lastName" name="lastName" required="required"><br>
 
-            <label for="email">Email &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</label>
-            <input class="width" type="text" id="email" name="email" required="required"><br><br>
+            <label for="email">Email</label>
+            <input class="width" type="text" id="email" name="email" required="required"><br>
 
-            <label for="username">Username &nbsp; &nbsp; &nbsp; &nbsp;</label>
-            <input class="width" type="text" id="username" name="username" required="required"><br><br>
+            <label for="username">Username</label>
+            <input class="width" type="text" id="username" name="username" required="required"><br>
 
-            <label for="password">Password &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</label>
-            <input class="width" type="password" id="password" name="password" required="required"><br><br>
+            <label for="password">Password</label>
+            <input class="width" type="password" id="password" name="password" required="required"><br>
 
             <input class="btn" type="submit" value="Submit">
         </form>

@@ -3,6 +3,36 @@
 {% block title %}Home - Quiz App{% endblock %}
 
 {% block content %}
+    <style>
+        .quiz1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .btn {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color:rgb(201, 218, 202);
+        }
+        .text_color {
+            color: white;
+            text-decoration: none;
+        }
+        .text_color:hover {
+            color: yellow;
+        }
+    </style>
+
     <div class="quiz1">
         <button class="btn">
             <a href="{% url 'quiz' %}" class="text_color">Start Quiz</a>

@@ -3,6 +3,54 @@
 {% block title %}Login - Quiz App{% endblock %}
 
 {% block content %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color:rgb(154, 174, 194);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 100px;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        label {
+            display: inline-block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .width {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+
     <center>
         <div class="container">
             <form method="POST">
@@ -10,11 +58,11 @@
 
                 <h2>Login</h2>
 
-                <label for="username">Username &nbsp; &nbsp; &nbsp; &nbsp;</label>
-                <input class="width" type="text" id="username" name="username" required="required"><br><br>
+                <label for="username">Username</label>
+                <input class="width" type="text" id="username" name="username" required="required"><br>
 
-                <label for="password">Password &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </label>
-                <input class="width" type="password" id="password" name="password" required="required"><br><br>
+                <label for="password">Password</label>
+                <input class="width" type="password" id="password" name="password" required="required"><br>
 
                 <button class="btn">Login</button>
             </form>
