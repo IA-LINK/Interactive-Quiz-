@@ -12,3 +12,11 @@ class Question(models.Model):
 
     def get_question_total():
         return Question.objects.all().count()
+    
+
+class Subscriber(models.Model):
+    email = models.EmailField(unique=True)
+    subscribed_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email

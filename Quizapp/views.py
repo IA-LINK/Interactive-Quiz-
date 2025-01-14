@@ -4,6 +4,30 @@ from django.http import JsonResponse
 from django.http import HttpResponse
 from .models import Question
 from django.core.paginator import Paginator, EmptyPage
+from django.contrib import messages
+
+from .models import Subscriber
+from django.db import IntegrityError
+
+def About(request):
+    return render(request, 'about.html')  
+
+def subscribe_newsletter(request):
+    if request.method == "POST":
+        email = request.POST.get('email')
+        if Subscriber.objects.filter(email=email).exists():
+            # Email already subscribed
+            messages.warning(request, "You are already subscribed!")
+        else:
+            try:
+                Subscriber.objects.create(email=email)
+                messages.success(request, "Thank you for subscribing!")
+            except IntegrityError:
+                # Handle unexpected errors gracefully
+                messages.error(request, "An error occurred. Please try again.")
+        return redirect('home')
+    return redirect('home')
+
 
 
 
