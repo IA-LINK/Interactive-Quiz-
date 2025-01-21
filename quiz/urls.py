@@ -9,4 +9,5 @@ urlpatterns = [
     path('result/', views.quiz_result, name='quiz_result'),  # Simplified path
     path('submit/', views.submit_quiz, name='submit'),  # For submitting quizzes
     path('quizz', views.quizz_view, name='quiz'),
+    path('login/', views.login_view, name='login'),
 ]

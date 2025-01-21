@@ -1,9 +1,37 @@
 from django.shortcuts import redirect, render # type: ignore
 
 from django.http import HttpResponseRedirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+
+# Login view
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('quiz')  # Redirect to quiz page
+        else:
+            return render(request, 'login.html', {'error': 'Invalid username or password'})
+    return render(request, 'login.html')
+
+# Quiz view (requires login)
+@login_required
+def quiz_view(request):
+    quizzes = [
+        {'title': 'Math Quiz', 'description': 'Test your math skills!', 'questions': 10},
+        {'title': 'Science Quiz', 'description': 'Explore the wonders of science!', 'questions': 15},
+        {'title': 'History Quiz', 'description': 'Dive into historical events!', 'questions': 12},
+    ]
+    return render(request, 'quiz.html', {'quizzes': quizzes})
 
 def profile(request):
     return render(request, 'profile.html')
+
+def login_view(request):
+    return render(request, 'profile/login.html')
 
 def quiz_page(request):
     return render(request, 'quiz_page.html') 
