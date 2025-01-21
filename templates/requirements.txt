@@ -1,0 +1,18 @@
+asgiref==3.7.2
+Django==5.0.1
+sqlparse==0.4.4
+tzdata==2023.4
+
+
+to install all requirements command is 
+pip install -r requirements.txt
+
+virtual environment
+powershell necessary steps
+Get-ExecutionPolicy  ------------to check the status
+set-executionpolicy restricted 
+set-executionpolicy unrestricted
+
+cmd command
+1. go to poject folder like cd folder/file name
+2. myenv\Scripts\activate

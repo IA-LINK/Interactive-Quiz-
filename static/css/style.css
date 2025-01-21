@@ -1,0 +1,110 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #3c81c5; /* Light gray background */
+    color: #5c2a2a; /* Dark text */
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: #202224; /* Bootstrap primary color */
+}
+
+/* Navbar */
+.navbar {
+    background-color: #007bff; /* Primary color */
+}
+
+.navbar a {
+    color: #fff !important;
+}
+
+/* Features Section */
+#features .card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#features .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+#features .card-title {
+    color: #007bff;
+    font-weight: bold;
+}
+
+#features .card-text {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* Contact Section */
+#contact p {
+    font-size: 1rem;
+    color: #555;
+}
+
+#contact p a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+#contact p a:hover {
+    text-decoration: underline;
+}
+
+/* Feedback Section */
+#feedback form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#feedback textarea {
+    resize: none;
+}
+
+/* FAQs Section */
+#faqs .accordion-button {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+}
+
+#faqs .accordion-button:not(.collapsed) {
+    background-color: #0056b3;
+}
+
+#faqs .accordion-body {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Footer */
+footer {
+    background-color: #343a40; /* Dark background */
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    #features .card {
+        margin-bottom: 1rem;
+    }
+}

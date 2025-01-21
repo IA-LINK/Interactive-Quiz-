@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take the Quiz</title>
+</head>
+<body>
+    <h1>Welcome to the Quiz!</h1>
+    <!-- Add your quiz content here -->
+   <!-- quiz_page.html -->
+    
+   <form action="{% url 'quiz:submit' %}" method="post">
+        {% csrf_token %}
+        <!-- Form fields here -->
+     <button type="submit">Submit Quiz</button>
+    </form>
+
+</body>
+</html>

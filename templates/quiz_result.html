@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+</head>
+<body>
+    <h1>Your Quiz Results</h1>
+    
+    <p>Total Score: {{ total_score }}</p>
+    <p>Total Fail: {{ total_fail }}</p>
+    <p>Average Score: {{ average_score }}</p>
+
+    <!-- Button to take the quiz again -->
+    <a href="{% url 'quiz:start' %}">Start Quiz</a>
+<a href="{% url 'quiz:quiz' %}">Take Quiz</a>
+<a href="{% url 'quiz:quiz_result' %}">View Results</a>
+
+</body>
+</html>
