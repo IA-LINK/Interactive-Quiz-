@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profiles</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Profile Details for {{ user.username }}</h1>
+    </header>
+
+    <section>
+        <h2>Quiz Profile</h2>
+        {% if quiz_profile %}
+            <p><strong>Bio:</strong> {{ quiz_profile.bio }}</p>
+            <p><strong>Date of Birth:</strong> {{ quiz_profile.date_of_birth }}</p>
+            {% if quiz_profile.avatar %}
+                <img src="{{ quiz_profile.avatar.url }}" alt="Quiz Profile Avatar" width="150">
+            {% else %}
+                <p>No avatar uploaded.</p>
+            {% endif %}
+        {% else %}
+            <p>No Quiz Profile found.</p>
+        {% endif %}
+    </section>
+
+    <section>
+        <h2>Account Profile</h2>
+        {% if account_profile %}
+            <p><strong>Additional Info:</strong> {{ account_profile.additional_field }}</p>
+        {% else %}
+            <p>No Account Profile found.</p>
+        {% endif %}
+    </section>
+
+    <footer>
+        <a href="/">Back to Home</a>
+    </footer>
+</body>
+</html>

@@ -4,18 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #45a049;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .results {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Your Quiz Results</h1>
-    
-    <p>Total Score: {{ total_score }}</p>
-    <p>Total Fail: {{ total_fail }}</p>
-    <p>Average Score: {{ average_score }}</p>
+    <div class="container">
+        <h1>Your Quiz Results</h1>
+        
+        <div class="results">
+            <p>Total Score: {{ total_score }}</p>
+            <p>Total Fail: {{ total_fail }}</p>
+            <p>Average Score: {{ average_score }}</p>
+        </div>
 
-    <!-- Button to take the quiz again -->
-    <a href="{% url 'quiz:start' %}">Start Quiz</a>
-<a href="{% url 'quiz:quiz' %}">Take Quiz</a>
-<a href="{% url 'quiz:quiz_result' %}">View Results</a>
-
+        <!-- Buttons to take the quiz again -->
+        <div>
+            <a href="{% url 'quiz:start' %}">Start Quiz</a>
+            <a href="{% url 'quiz:quiz' %}">Take Quiz</a>
+            <a href="{% url 'quiz:quiz_result' %}">View Results</a>
+        </div>
+    </div>
 </body>
 </html>

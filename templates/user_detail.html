@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Detail</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Details for {{ user.username }}</h1>
+    </header>
+
+    <section>
+        <h2>General Information</h2>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Date Joined:</strong> {{ user.date_joined }}</p>
+        <p><strong>Last Login:</strong> {{ user.last_login }}</p>
+    </section>
+
+    <section>
+        <h2>Quiz Attempts</h2>
+        {% if quiz_attempts %}
+            <ul>
+                {% for attempt in quiz_attempts %}
+                    <li>
+                        <strong>Quiz:</strong> {{ attempt.quiz.title }}<br>
+                        <strong>Score:</strong> {{ attempt.score }}<br>
+                        <strong>Date:</strong> {{ attempt.completed_at }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No quiz attempts found.</p>
+        {% endif %}
+    </section>
+
+    <footer>
+        <a href="/">Back to Home</a>
+    </footer>
+</body>
+</html>

@@ -1,10 +1,78 @@
-from django.shortcuts import redirect, render # type: ignore
+from django.shortcuts import get_object_or_404, redirect, render # type: ignore
 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django import forms
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
 
-# Login view
+def user_detail(request, username):
+    user = get_object_or_404(User, username=username)
+    # If the user does not exist, a 404 error will be raised
+    return render(request, 'user_detail.html', {'user': user})
+
+def user_detail(request, username):
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        user = None
+
+    if user:
+        return render(request, 'user_detail.html', {'user': user})
+    else:
+        return HttpResponse('User Does Not Exist', status=404)
+    
+class CustomUserCreationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'signup.html', {'form': form})
+
+
+def user_profiles(request, username):
+    try:
+        user = User.objects.get(username=username)
+        quiz_profile = user.quiz_profile
+        account_profile = user.account_profile
+        return render(request, 'user_profiles.html', {
+            'user': user,
+            'quiz_profile': quiz_profile,
+            'account_profile': account_profile,
+        })
+    except User.DoesNotExist:
+        return render(request, '404.html', {'message': 'User not found'})
+    
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        if not username or not password:
+            return HttpResponse("Username and password are required")
+
+        try:
+            user = User.objects.get(username=username)
+            if user.check_password(password):
+                return HttpResponse("Login successful")
+            else:
+                return HttpResponse("Invalid password")
+        except User.DoesNotExist:
+            return HttpResponse("User does not exist")
+
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -12,10 +80,11 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('quiz')  # Redirect to quiz page
+            return HttpResponseRedirect('/')  # Redirect to home page or another page
         else:
-            return render(request, 'login.html', {'error': 'Invalid username or password'})
+            return render(request, 'login.html', {'error': 'Invalid credentials'})
     return render(request, 'login.html')
+
 
 # Quiz view (requires login)
 @login_required
@@ -26,6 +95,7 @@ def quiz_view(request):
         {'title': 'History Quiz', 'description': 'Dive into historical events!', 'questions': 12},
     ]
     return render(request, 'quiz.html', {'quizzes': quizzes})
+
 
 def profile(request):
     return render(request, 'profile.html')
@@ -125,10 +195,10 @@ def quiz_result(request):
     return render(request, 'quiz_result.html', context)
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'profile/index.html')
 
 def quiz(request):
-    return render(request, 'quiz.html')
+    return render(request, 'profile/quiz.html')
 
 def login_view(request):
     return render(request, 'profile/login.html')
@@ -141,3 +211,27 @@ def leaderboard_view(request):
 
 def quizz_view(request):
     return render(request, 'quizz.html')
+
+
+def leaderboard(request):
+    # Add any context data you need to pass to the template
+    context = {
+        'users': [
+            {'name': 'Alice', 'score': 95},
+            {'name': 'Bob', 'score': 89},
+            {'name': 'Charlie', 'score': 75},
+        ]
+    }
+    return render(request, 'profile/leaderboard.html', context)
+
+def register(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}!')
+            return redirect('login')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'register.html', {'form': form})

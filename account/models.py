@@ -17,3 +17,10 @@ class Profile(models.Model):
 
 # these are the schema declaration credientials which we have to specify in model to use in database
 
+class Profile(models.Model):
+    user = models.OneToOneField(
+        User, 
+        on_delete=models.CASCADE, 
+        related_name='account_profile'
+    )
+    additional_field = models.CharField(max_length=255, blank=True, null=True)
